@@ -6,6 +6,5 @@
         "runtime": "automatic"
       }
     ]
-  ],
-  "plugins": ["styled-jsx/babel"]
+  ]
 }
