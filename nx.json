@@ -27,12 +27,12 @@
     ]
   },
   "projects": {
-    "coinconket": {
-      "tags": []
+    "frontend": {
+      "tags": ["react", "typescript"]
     },
-    "coinconket-e2e": {
+    "frontend-e2e": {
       "tags": [],
-      "implicitDependencies": ["coinconket"]
+      "implicitDependencies": ["frontend"]
     }
   }
 }

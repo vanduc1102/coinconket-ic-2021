@@ -1,6 +1,6 @@
 import { getGreeting } from '../support/app.po';
 
-describe('coinconket', () => {
+describe('CoinConKet', () => {
   beforeEach(() => cy.visit('/'));
 
   it('should display welcome message', () => {
