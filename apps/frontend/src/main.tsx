@@ -2,9 +2,9 @@ import { StrictMode } from 'react';
 import * as ReactDOM from 'react-dom';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import { ThemeProvider } from '@material-ui/core/styles';
-import theme from './theme';
+import theme from '@coinconket/shared/configuration/theme';
 
-import App from './app/app';
+import App from './App';
 
 ReactDOM.render(
   <StrictMode>

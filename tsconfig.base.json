@@ -14,7 +14,9 @@
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
-    "paths": {}
+    "paths": {
+      "@coinconket/shared/*": ["libs/shared/src/*"]
+    }
   },
   "exclude": ["node_modules", "tmp"]
 }
