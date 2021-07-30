@@ -4,7 +4,6 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 import { ThemeProvider } from '@material-ui/core/styles';
 import { SnackbarProvider } from 'notistack';
 import theme from '@coinconket/shared/configuration/theme';
-import Slide from '@material-ui/core/Slide';
 
 import App from './App';
 
