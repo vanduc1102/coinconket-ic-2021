@@ -35,7 +35,7 @@
       "implicitDependencies": ["frontend"]
     },
     "shared": {
-      "tags": ["react","typescript"]
+      "tags": ["react", "typescript"]
     }
   }
 }
