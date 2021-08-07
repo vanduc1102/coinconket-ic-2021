@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import { Web3Provider } from '@ethersproject/providers';
 import { Box, Button, TextField } from '@material-ui/core';
 import { useFormik } from 'formik';
@@ -7,6 +7,7 @@ import useStyles from './styles';
 import { useTheme } from '@material-ui/core';
 import { useWeb3React } from '@web3-react/core';
 import { injected } from '../../../configurations/connectors';
+import StorageContractContent from '../../../configurations/contracts/storage';
 
 const validationSchema = yup.object({
   name: yup.string().required('name is required'),
@@ -17,6 +18,14 @@ const validationSchema = yup.object({
 });
 
 const Erc20Form: React.FC = () => {
+  const [compileResult, setCompileResult] = useState();
+
+  const soliditySolc: Worker = useMemo(() => {
+    return new Worker('../../../SolidityCompiler.worker.ts', {
+      type: 'module',
+    });
+  }, []);
+
   const classes = useStyles();
   const theme = useTheme();
   const { active, activate, deactivate } = useWeb3React<Web3Provider>();
@@ -47,6 +56,27 @@ const Erc20Form: React.FC = () => {
     deactivate();
   };
 
+  useEffect(() => {
+    soliditySolc.onmessage = ($event) => {
+      console.log('$event.data: ', $event.data);
+      setCompileResult($event.data);
+    };
+
+    return () => {
+      soliditySolc.terminate();
+    };
+  }, [soliditySolc]);
+
+  const handleCompile = async () => {
+    console.log('Handle compile: ', Date.now());
+    console.log('StorageContract:::', StorageContractContent);
+
+    soliditySolc.postMessage({
+      command: 'compile',
+      content: StorageContractContent,
+    });
+  };
+
   return (
     <>
       <Box marginBottom={theme.spacing(1)} marginTop={theme.spacing(1)}>
@@ -58,42 +88,50 @@ const Erc20Form: React.FC = () => {
           {isLogin ? 'Logout' : 'Login with MetaMask'}
         </Button>
       </Box>
-      <form onSubmit={formik.handleSubmit}>
-        <TextField
-          fullWidth
-          className={classes.inputField}
-          id="name"
-          name="name"
-          label="Token name"
-          type="text"
-          variant="outlined"
-          value={formik.values.name}
-          onChange={formik.handleChange}
-          error={formik.touched.name && Boolean(formik.errors.name)}
-          helperText={formik.touched.name && formik.errors.name}
-        />
-        <TextField
-          fullWidth
-          className={classes.inputField}
-          id="symbol"
-          name="symbol"
-          label="Token symbol"
-          type="text"
-          variant="outlined"
-          value={formik.values.symbol}
-          onChange={formik.handleChange}
-          error={formik.touched.symbol && Boolean(formik.errors.symbol)}
-          helperText={formik.touched.symbol && formik.errors.symbol}
-        />
-        <Button
-          className={classes.inputField}
-          color="primary"
-          variant="contained"
-          type="submit"
-        >
-          Submit
+      <Box marginTop={theme.spacing(1)}>
+        <Button color="default" variant="contained" onClick={handleCompile}>
+          Compile
         </Button>
-      </form>
+      </Box>
+      <Box>{JSON.stringify(compileResult)}</Box>
+      <Box marginTop={theme.spacing(1)}>
+        <form onSubmit={formik.handleSubmit}>
+          <TextField
+            fullWidth
+            className={classes.inputField}
+            id="name"
+            name="name"
+            label="Token name"
+            type="text"
+            variant="outlined"
+            value={formik.values.name}
+            onChange={formik.handleChange}
+            error={formik.touched.name && Boolean(formik.errors.name)}
+            helperText={formik.touched.name && formik.errors.name}
+          />
+          <TextField
+            fullWidth
+            className={classes.inputField}
+            id="symbol"
+            name="symbol"
+            label="Token symbol"
+            type="text"
+            variant="outlined"
+            value={formik.values.symbol}
+            onChange={formik.handleChange}
+            error={formik.touched.symbol && Boolean(formik.errors.symbol)}
+            helperText={formik.touched.symbol && formik.errors.symbol}
+          />
+          <Button
+            className={classes.inputField}
+            color="primary"
+            variant="contained"
+            type="submit"
+          >
+            Submit
+          </Button>
+        </form>
+      </Box>
     </>
   );
 };

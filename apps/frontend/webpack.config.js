@@ -1,14 +1,14 @@
-const nrwlConfig = require("@nrwl/react/plugins/webpack.js");
+const WorkerPlugin = require('worker-plugin');
+const nrwlConfig = require('@nrwl/react/plugins/webpack.js');
 
 module.exports = (config, context) => {
   nrwlConfig(config);
   return {
     ...config,
     node: {
-      Buffer: true
+      Buffer: true,
+      module: 'empty',
     },
-    plugins: [
-      ...config.plugins
-    ]
+    plugins: [new WorkerPlugin(), ...config.plugins],
   };
 };

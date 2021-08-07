@@ -1,5 +1,5 @@
 const storage = `
-pragma solidity ^0.4.0;
+pragma solidity ^0.8.0;
 
 contract SimpleStorage {
     uint storedData;
