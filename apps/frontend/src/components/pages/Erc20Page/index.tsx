@@ -1,4 +1,4 @@
-import { Typography } from '@material-ui/core';
+import { Box, Container, Typography } from '@material-ui/core';
 import React from 'react';
 import LoginButton from '../../molecules/LoginButton';
 import Erc20Form from '../../organisms/Erc20Form';
@@ -6,14 +6,12 @@ import Header from '../../organisms/Header';
 
 const Erc20Page: React.FC = () => {
   return (
-    <>
-      <Typography variant="h2" align="center">
-        Welcome to CoinConKet!
+    <Box padding="medium">
+      <Typography variant="h4" align="center">
+        Create ERC20 Token
       </Typography>
-      <Header />
-      <LoginButton />
       <Erc20Form />
-    </>
+    </Box>
   );
 };
 

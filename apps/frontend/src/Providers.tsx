@@ -1,6 +1,7 @@
 import React from 'react';
 import { CssBaseline, ThemeProvider } from '@material-ui/core';
 import { SnackbarProvider } from 'notistack';
+import { ConfirmProvider } from 'material-ui-confirm';
 import theme from '@coinconket/shared/configuration/theme';
 import { Web3ReactProvider } from '@web3-react/core';
 
@@ -11,15 +12,17 @@ const Providers: React.FC = ({ children }) => {
     <Web3ReactProvider getLibrary={getLibrary}>
       <ThemeProvider theme={theme}>
         <CssBaseline />
-        <SnackbarProvider
-          maxSnack={3}
-          anchorOrigin={{
-            vertical: 'bottom',
-            horizontal: 'right',
-          }}
-        >
-          {children}
-        </SnackbarProvider>
+        <ConfirmProvider>
+          <SnackbarProvider
+            maxSnack={3}
+            anchorOrigin={{
+              vertical: 'bottom',
+              horizontal: 'right',
+            }}
+          >
+            {children}
+          </SnackbarProvider>
+        </ConfirmProvider>
       </ThemeProvider>
     </Web3ReactProvider>
   );

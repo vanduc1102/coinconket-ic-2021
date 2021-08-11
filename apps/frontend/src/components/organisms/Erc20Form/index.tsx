@@ -63,7 +63,7 @@ const Erc20Form: React.FC = () => {
 
   const handleFormSubmit = async (contractConfig: ContractConfig) => {
     if (!account) {
-      enqueueSnackbar('Please connect your account first.', {
+      enqueueSnackbar('Please connect your MetaMask wallet first.', {
         variant: 'warning',
       });
       return;
@@ -156,6 +156,7 @@ const Erc20Form: React.FC = () => {
       ...formDefaultValue,
     },
     validationSchema: validationSchema,
+    validateOnBlur: true,
     onSubmit: handleFormSubmit,
   });
 
