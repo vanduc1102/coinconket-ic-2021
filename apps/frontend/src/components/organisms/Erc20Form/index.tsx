@@ -161,7 +161,7 @@ const Erc20Form: React.FC = () => {
   });
 
   return (
-    <Box marginTop={theme.spacing(1)}>
+    <Box margin="auto" maxWidth="512px">
       <form onSubmit={formik.handleSubmit}>
         <TextField
           fullWidth

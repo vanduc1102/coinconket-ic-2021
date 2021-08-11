@@ -1,4 +1,4 @@
-import { Box, Container, Typography } from '@material-ui/core';
+import { Box, Container, Grid, Typography } from '@material-ui/core';
 import React from 'react';
 import LoginButton from '../../molecules/LoginButton';
 import Erc20Form from '../../organisms/Erc20Form';
@@ -6,7 +6,7 @@ import Header from '../../organisms/Header';
 
 const Erc20Page: React.FC = () => {
   return (
-    <Box padding="medium">
+    <Box margin="auto">
       <Typography variant="h4" align="center">
         Create ERC20 Token
       </Typography>
