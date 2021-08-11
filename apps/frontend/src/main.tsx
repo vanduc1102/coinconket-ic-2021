@@ -5,10 +5,8 @@ import App from './App';
 import Providers from './Providers';
 
 ReactDOM.render(
-  <StrictMode>
-    <Providers>
-      <App />
-    </Providers>
-  </StrictMode>,
+  <Providers>
+    <App />
+  </Providers>,
   document.getElementById('root')
 );

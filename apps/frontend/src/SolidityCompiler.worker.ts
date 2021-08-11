@@ -10,15 +10,18 @@ console.log('Solidity compiler Worker: ', Date.now());
 
 ctx.addEventListener('message', ({ data }) => {
   const solc = wrapper((ctx as any).Module);
-  console.log('Solidity compiler Worker receiving: ', data);
   const compileResult = solc.compile(
-    createCompileInput('storage.sol', data.content)
+    createCompileInput(data.contractFileName, data.content)
   );
+  console.log('Compile result: ', compileResult);
   ctx.postMessage(compileResult);
 });
 
-function createCompileInput(fileName: string, fileContent: string): string {
-  return JSON.stringify({
+function createCompileInput(
+  fileName = 'storage.sol',
+  fileContent: string
+): string {
+  const CompileInput = {
     language: 'Solidity',
     sources: {
       [fileName]: {
@@ -32,5 +35,7 @@ function createCompileInput(fileName: string, fileContent: string): string {
         },
       },
     },
-  });
+  };
+  console.log('CompileInput: ', CompileInput);
+  return JSON.stringify(CompileInput);
 }

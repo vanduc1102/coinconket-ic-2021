@@ -14,8 +14,8 @@ const Providers: React.FC = ({ children }) => {
         <SnackbarProvider
           maxSnack={3}
           anchorOrigin={{
-            vertical: 'top',
-            horizontal: 'left',
+            vertical: 'bottom',
+            horizontal: 'right',
           }}
         >
           {children}

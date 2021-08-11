@@ -1,7 +1,8 @@
 const storage = `
 pragma solidity ^0.8.0;
+// SPDX-License-Identifier: MIT
 
-contract SimpleStorage {
+contract {{ContractName}} {
     uint storedData;
 
     function set(uint x) public {
